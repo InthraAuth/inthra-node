@@ -1,0 +1,43 @@
+{
+  "name": "@inthra/sdk",
+  "version": "0.1.0",
+  "description": "Node SDK for the Inthra public project API",
+  "keywords": [
+    "inthra",
+    "authentication",
+    "identity",
+    "node",
+    "sdk",
+    "typescript"
+  ],
+  "homepage": "https://inthra.dev/docs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vlad6tz/inthra.git",
+    "directory": "sdk/ts"
+  },
+  "bugs": {
+    "url": "https://github.com/vlad6tz/inthra/issues"
+  },
+  "license": "MIT",
+  "author": "Inthra",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "docs"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "prepublishOnly": "bun run typecheck && bun run build && bun run test",
+    "gen:api-types": "openapi-typescript ../../docs/openapi.yaml -o src/api-types.ts"
+  }
+}
