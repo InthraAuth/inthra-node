@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "@inthra/sdk",
+      "name": "@inthraauth/sdk",
       "devDependencies": {
         "typescript": "^5.9.3",
       },

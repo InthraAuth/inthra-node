@@ -1,4 +1,4 @@
-# @inthra/sdk
+# @inthraauth/sdk
 
 Node SDK for the Inthra public project API.
 
@@ -9,13 +9,13 @@ Documentation: https://inthra.dev/en/docs/api/authentication
 ## Install
 
 ```bash
-npm install @inthra/sdk
+npm install @inthraauth/sdk
 ```
 
 ## Usage
 
 ```ts
-import { Inthra } from "@inthra/sdk";
+import { Inthra } from "@inthraauth/sdk";
 
 const inthra = new Inthra({
   apiKey: process.env.INTHRA_PROJECT_CREDENTIAL!,
@@ -30,7 +30,7 @@ const session = await inthra.auth.loginWithEmail("project_123", {
 JavaScript works the same way:
 
 ```js
-const { Inthra } = require("@inthra/sdk");
+const { Inthra } = require("@inthraauth/sdk");
 const inthra = new Inthra({ apiKey: process.env.INTHRA_PROJECT_CREDENTIAL });
 const users = await inthra.users.list("project_123", { limit: 20 });
 ```

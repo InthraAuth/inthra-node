@@ -1,5 +1,5 @@
 {
-  "name": "@inthra/sdk",
+  "name": "@inthraauth/sdk",
   "version": "0.1.0",
   "description": "Node SDK for the Inthra public project API",
   "keywords": [
