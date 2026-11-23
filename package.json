@@ -13,8 +13,7 @@
   "homepage": "https://inthra.dev/docs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vlad6tz/inthra.git",
-    "directory": "sdk/ts"
+    "url": "https://github.com/vlad6tz/inthra.git"
   },
   "bugs": {
     "url": "https://github.com/vlad6tz/inthra/issues"
@@ -37,7 +36,6 @@
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
     "test": "bun test",
-    "prepublishOnly": "bun run typecheck && bun run build && bun run test",
-    "gen:api-types": "openapi-typescript ../../docs/openapi.yaml -o src/api-types.ts"
+    "prepublishOnly": "bun run typecheck && bun run build && bun run test"
   }
 }
