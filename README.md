@@ -52,5 +52,4 @@ See [docs/api.md](docs/api.md) for the full function list.
 bun run typecheck
 bun run build
 bun run test
-bun run gen:api-types
 ```
