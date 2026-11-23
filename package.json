@@ -13,10 +13,11 @@
   "homepage": "https://inthra.dev/docs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vlad6tz/inthra.git"
+    "url": "https://github.com/InthraAuth/inthra-node.git",
+    "directory": "."
   },
   "bugs": {
-    "url": "https://github.com/vlad6tz/inthra/issues"
+    "url": "https://github.com/InthraAuth/inthra-node/issues"
   },
   "license": "MIT",
   "author": "Inthra",
@@ -33,9 +34,12 @@
     "node": ">=18"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "typecheck": "tsc --noEmit",
+    "build": "bunx tsc -p tsconfig.build.json",
+    "typecheck": "bunx tsc --noEmit",
     "test": "bun test",
     "prepublishOnly": "bun run typecheck && bun run build && bun run test"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
   }
 }
