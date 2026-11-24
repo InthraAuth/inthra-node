@@ -189,6 +189,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/projects/{project_id}/passwordless/request-code": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Send a passwordless customer access code
+         * @description Sends a one-time code to an email address without requiring an existing user. The response never reveals whether an account exists.
+         */
+        post: operations["requestPasswordlessCode"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{project_id}/passwordless/verify-code": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Verify a customer access code and authenticate
+         * @description Resolves an existing project user by verified email or creates a new verified user, then follows the normal session and MFA flow.
+         */
+        post: operations["verifyPasswordlessCode"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/projects/{project_id}/login/otp/request": {
         parameters: {
             query?: never;
@@ -539,7 +579,7 @@ export interface paths {
         put?: never;
         /**
          * Ban a project user (revokes their sessions)
-         * @description The reason is optional, an empty body stores a NULL reason.
+         * @description The reason is optional — an empty body stores a NULL reason.
          */
         post: operations["banUser"];
         delete?: never;
@@ -830,7 +870,7 @@ export interface components {
             /** @description Whether TOTP MFA is enabled for the user. */
             is_mfa_enabled?: boolean;
         };
-        /** @description Optional body for the ban operation, absent body stores NULL. */
+        /** @description Optional body for the ban operation — absent body stores NULL. */
         BanRequest: {
             reason?: string;
         };
@@ -1400,6 +1440,99 @@ export interface operations {
             500: components["responses"]["InternalError"];
         };
     };
+    requestPasswordlessCode: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The project every identity resource belongs to */
+                project_id: components["parameters"]["ProjectID"];
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** Format: email */
+                    email: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Generic response. A code is sent when the address is eligible. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        message: string;
+                    };
+                };
+            };
+            400: components["responses"]["BadRequest"];
+            /** @description Passwordless customer access is disabled for this project. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Rate limit exceeded */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    verifyPasswordlessCode: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The project every identity resource belongs to */
+                project_id: components["parameters"]["ProjectID"];
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** Format: email */
+                    email: string;
+                    code: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Session issued or MFA challenge required */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LoginResponse"];
+                };
+            };
+            400: components["responses"]["BadRequest"];
+            /** @description Passwordless access disabled or MFA enrollment required. */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Rate limit exceeded */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     requestEmailOTP: {
         parameters: {
             query?: never;
@@ -1619,7 +1752,7 @@ export interface operations {
                     "application/json": components["schemas"]["Error"];
                 };
             };
-            /** @description Refresh token reused, session invalidated */
+            /** @description Refresh token reused — session invalidated */
             409: {
                 headers: {
                     [name: string]: unknown;
