@@ -11,7 +11,7 @@ Creates a client.
 | Option | Type | Description |
 | --- | --- | --- |
 | `apiKey` | `string` or function | Project credential from the dashboard. |
-| `baseUrl` | `string` | Optional API base URL. Defaults to `https://api.inthra.dev`. |
+| `baseUrl` | `string` | Optional API base URL. Defaults to `https://inthra.dev/api`. |
 | `fetch` | `typeof fetch` | Optional custom fetch implementation. |
 | `projectId` | `string` | Project ID used by `client.passwordless`. |
 

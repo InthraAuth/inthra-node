@@ -4,7 +4,7 @@ export type InthraOptions = {
   apiKey: string | (() => string);
   /** Project ID used by passwordless customer access. */
   projectId?: string;
-  /** API base URL. Defaults to https://api.inthra.dev. */
+  /** API base URL. Defaults to https://inthra.dev/api. */
   baseUrl?: string;
   /** Custom fetch implementation, useful for tests or proxies. */
   fetch?: typeof fetch;

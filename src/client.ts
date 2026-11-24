@@ -27,7 +27,7 @@ export class Inthra {
   constructor(options: InthraOptions) {
     if (!options.apiKey) throw new Error("apiKey is required");
     this.apiKey = options.apiKey;
-    this.baseUrl = (options.baseUrl ?? "https://api.inthra.dev").replace(/\/+$/, "");
+    this.baseUrl = (options.baseUrl ?? "https://inthra.dev/api").replace(/\/+$/, "");
     this.fetchImpl = options.fetch ?? fetch;
 
     const request: RequestFn = this.request.bind(this) as RequestFn;
