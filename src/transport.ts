@@ -2,6 +2,8 @@
 export type InthraOptions = {
   /** Project credential created in the Inthra dashboard. Keep it server side. */
   apiKey: string | (() => string);
+  /** Project ID used by passwordless customer access. */
+  projectId?: string;
   /** API base URL. Defaults to https://api.inthra.dev. */
   baseUrl?: string;
   /** Custom fetch implementation, useful for tests or proxies. */

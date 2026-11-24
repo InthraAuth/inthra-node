@@ -13,6 +13,7 @@ Creates a client.
 | `apiKey` | `string` or function | Project credential from the dashboard. |
 | `baseUrl` | `string` | Optional API base URL. Defaults to `https://api.inthra.dev`. |
 | `fetch` | `typeof fetch` | Optional custom fetch implementation. |
+| `projectId` | `string` | Project ID used by `client.passwordless`. |
 
 ## `client.auth`
 
@@ -27,6 +28,15 @@ Creates a client.
 | `verifyEmail(projectId, params, signal?)` | Verifies an email address. |
 | `refresh(refreshToken, signal?)` | Rotates a refresh token. |
 | `getAuthMethods(projectId, signal?)` | Lists enabled sign in methods. |
+
+## `client.passwordless`
+
+| Method | Description |
+| --- | --- |
+| `requestCode({ email }, signal?)` | Sends a one-time customer access code. Requires `projectId` on the client. |
+| `verifyCode({ email, code }, signal?)` | Verifies the code and returns the standard session or MFA challenge response. |
+
+If the response contains `mfa_required`, call `client.auth.completeMFALogin(projectId, { challenge_token, code })`.
 
 ## `client.oauth`
 

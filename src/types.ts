@@ -104,3 +104,12 @@ export type CompleteOAuthMFAEnrollmentResponse = RefreshSessionResponse & {
 };
 
 export type OAuthProvider = "google" | "discord";
+
+/** Request body for sending a passwordless customer access code. */
+export type RequestPasswordlessCodeRequest = { email: string };
+
+/** Request body for verifying a passwordless customer access code. */
+export type VerifyPasswordlessCodeRequest = { email: string; code: string };
+
+/** Generic response returned when a passwordless code is requested. */
+export type PasswordlessCodeResponse = { message: string };

@@ -38,3 +38,25 @@ describe("Inthra SDK", () => {
     }
   });
 });
+
+describe("passwordless customer access", () => {
+  test("requests and verifies a customer code", async () => {
+    const calls: Array<{ url: string; init: RequestInit }> = [];
+    const responses = [
+      new Response(JSON.stringify({ message: "sent" }), { status: 202, headers: { "Content-Type": "application/json" } }),
+      new Response(JSON.stringify({ access_token: "access", refresh_token: "refresh" }), { status: 200, headers: { "Content-Type": "application/json" } }),
+    ];
+    const fetchMock = (async (url: string, init: RequestInit) => {
+      calls.push({ url, init });
+      return responses.shift()!;
+    }) as typeof fetch;
+    const inthra = new Inthra({ apiKey: "inthra_test", projectId: "project-1", baseUrl: "https://api.test", fetch: fetchMock });
+
+    await inthra.passwordless.requestCode({ email: "customer@example.com" });
+    const result = await inthra.passwordless.verifyCode({ email: "customer@example.com", code: "123456" });
+
+    expect(calls[0].url).toBe("https://api.test/v1/projects/project-1/passwordless/request-code");
+    expect(calls[1].url).toBe("https://api.test/v1/projects/project-1/passwordless/verify-code");
+    expect(result.access_token).toBe("access");
+  });
+});

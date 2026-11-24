@@ -4,6 +4,7 @@ import { AuthResource } from "./resources/auth";
 import { OAuthResource } from "./resources/oauth";
 import { UsersResource } from "./resources/users";
 import { SessionsResource } from "./resources/sessions";
+import { PasswordlessResource } from "./resources/passwordless";
 
 /**
  * Server side client for the Inthra public project API.
@@ -16,6 +17,7 @@ export class Inthra {
   readonly oauth: OAuthResource;
   readonly users: UsersResource;
   readonly sessions: SessionsResource;
+  readonly passwordless: PasswordlessResource;
 
   private readonly apiKey: string | (() => string);
   private readonly baseUrl: string;
@@ -33,6 +35,7 @@ export class Inthra {
     this.oauth = new OAuthResource(request, this.baseUrl);
     this.users = new UsersResource(request);
     this.sessions = new SessionsResource(request);
+    this.passwordless = new PasswordlessResource(request, options.projectId);
   }
 
   private credential(): string {
